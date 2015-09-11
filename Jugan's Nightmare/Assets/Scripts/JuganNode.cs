@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class JuganNode : MonoBehaviour {
 
@@ -8,12 +9,22 @@ public class JuganNode : MonoBehaviour {
     public int attack = 0;
     public int health = 1;
     public int shield = 0;
-    public ArrayList JuganNodes = new ArrayList();
+    List<Unit_Properties> units = new List<Unit_Properties>();
    
 
 	// Use this for initialization
 	void Start () {
-        JuganNodes.Add(new JuganNode());
+        units.Add(new Jugan_Hurts());
+        units.Add(new Jugan_Hurts());
+        units.Add(new Jugan_Average());
+        units.Add(new Jugan_Turtle());
+        units.Add(new Jugan_Turtle());
+        foreach (Unit_Properties s in units)
+        {
+            attack += s.attack;
+            health += s.health;
+            shield += s.shield;
+        }
 	}
 	
 	// Update is called once per frame
