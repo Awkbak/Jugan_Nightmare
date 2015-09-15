@@ -45,10 +45,13 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\Environment.cs" />
      <Compile Include="Assets\Scripts\JuganNode.cs" />
      <Compile Include="Assets\Scripts\Jugan_Average.cs" />
      <Compile Include="Assets\Scripts\Jugan_Hurts.cs" />
+     <Compile Include="Assets\Scripts\Jugan_Thinks.cs" />
      <Compile Include="Assets\Scripts\Jugan_Turtle.cs" />
+     <Compile Include="Assets\Scripts\Player.cs" />
      <Compile Include="Assets\Scripts\Unit_Properties.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
