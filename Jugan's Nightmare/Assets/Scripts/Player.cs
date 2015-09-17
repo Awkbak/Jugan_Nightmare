@@ -34,6 +34,8 @@ public class Player : MonoBehaviour {
 
     public void assignTurtle()
     {
+        GameObject a = Instantiate(GameObject.Find("Block Jugan"));
+        
         if (availablePieces > 0)
         {
             Jugan_Turtle temp = new Jugan_Turtle();
@@ -54,8 +56,12 @@ public class Player : MonoBehaviour {
 
     public void assignDan()
     {
+        GameObject a = Instantiate(GameObject.Find("Jugan"));
+        
         if (availablePieces > 0)
         {
+            a.transform.position = new Vector3(0, 0, 0);
+            
             Jugan_Average temp = new Jugan_Average();
             ownedUnits.Add(temp);
             mainBase.units.Add(temp); 
@@ -74,6 +80,8 @@ public class Player : MonoBehaviour {
 
     public void assignCheetah()
     {
+        GameObject a = Instantiate(GameObject.Find("Attack Jugan"));
+        
         if (availablePieces > 0)
         {
             Jugan_Hurts temp = new Jugan_Hurts();
