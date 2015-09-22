@@ -9,6 +9,10 @@ public class JuganNode : MonoBehaviour {
     public int attack = 0;
     public int health = 1;
     public int shield = 0;
+    public GameObject n1;
+    public GameObject n2;
+    public GameObject b1;
+    public GameObject b2;
     public List<Unit_Properties> units = new List<Unit_Properties>();
    
 

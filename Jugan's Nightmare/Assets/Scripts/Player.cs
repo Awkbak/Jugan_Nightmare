@@ -34,10 +34,12 @@ public class Player : MonoBehaviour {
 
     public void assignTurtle()
     {
-        GameObject a = Instantiate(GameObject.Find("Block Jugan"));
+        
         
         if (availablePieces > 0)
         {
+            GameObject a = Instantiate(GameObject.Find("Block Jugan"));
+            
             Jugan_Turtle temp = new Jugan_Turtle();
             ownedUnits.Add(temp);
             mainBase.units.Add(temp);
@@ -51,16 +53,18 @@ public class Player : MonoBehaviour {
                 mainBase.shield += s.shield;
             }
             availablePieces -= 1;
+
+            stacking(a);
         }
     }
 
     public void assignDan()
     {
-        GameObject a = Instantiate(GameObject.Find("Jugan"));
+        
         
         if (availablePieces > 0)
         {
-            a.transform.position = new Vector3(0, 0, 0);
+            GameObject a = Instantiate(GameObject.Find("Jugan"));
             
             Jugan_Average temp = new Jugan_Average();
             ownedUnits.Add(temp);
@@ -75,15 +79,19 @@ public class Player : MonoBehaviour {
                 mainBase.shield += s.shield;
             }
             availablePieces -= 1;
+
+            stacking(a);
         }
     }
 
     public void assignCheetah()
     {
-        GameObject a = Instantiate(GameObject.Find("Attack Jugan"));
+        
         
         if (availablePieces > 0)
         {
+            GameObject a = Instantiate(GameObject.Find("Attack Jugan"));
+            
             Jugan_Hurts temp = new Jugan_Hurts();
             ownedUnits.Add(temp);
             mainBase.units.Add(temp);
@@ -97,6 +105,19 @@ public class Player : MonoBehaviour {
                 mainBase.shield += s.shield;
             }
             availablePieces -= 1;
+
+            stacking(a);
         }
+    }
+
+    public void stacking(GameObject obj)
+    {
+        float height = ownedUnits.Count * .06f;
+        obj.transform.position = new Vector3(mainBase.transform.position.x, height + .05f, mainBase.transform.position.z);
+    }
+
+    public void moving()
+    {
+ 
     }
 }
