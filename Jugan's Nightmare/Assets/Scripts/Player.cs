@@ -7,13 +7,17 @@ public class Player : MonoBehaviour {
     public int availablePieces;
     public List<JuganNode> ownedNodes;
     public List<Unit_Properties> ownedUnits;
+    public List<GameObject> moveUnits;
     public JuganNode mainBase;
+    public GameObject click1;
+    public GameObject click2;
 
     public Player()
     {
         availablePieces = 3;
         ownedNodes = new List<JuganNode>();
         ownedUnits = new List<Unit_Properties>();
+        moveUnits = new List<GameObject>();
         mainBase = new JuganNode();
     }
 
@@ -113,10 +117,11 @@ public class Player : MonoBehaviour {
     public void stacking(GameObject obj)
     {
         float height = ownedUnits.Count * .06f;
+        moveUnits.Add(obj);
         obj.transform.position = new Vector3(mainBase.transform.position.x, height + .05f, mainBase.transform.position.z);
     }
 
-    public void moving()
+    public void selectNode()
     {
         if (Input.GetMouseButtonDown(0))
         {
@@ -128,17 +133,50 @@ public class Player : MonoBehaviour {
             {
                 if (hit.transform.gameObject.tag == "select")
                 {
-                    Debug.Log ("It's working!");
-                } else {
-                    Debug.Log ("nopz");
+                    if (click1 != null)
+                    {
+                        click2 = hit.transform.gameObject;
+                    }
+                    else
+                    {
+                        click1 = hit.transform.gameObject;
+                    }
                 }
-
             }
         }
     }
 
+    public void moving(GameObject node1, GameObject node2)
+    {
+        JuganNode n1 = node1.GetComponent<JuganNode>();
+        JuganNode n2 = node2.GetComponent<JuganNode>();
+
+        if (n1.n1.Equals(node2) || n1.n2.Equals(node2))
+        {
+            JuganNode a = click1.GetComponent<JuganNode>();
+            JuganNode b = click2.GetComponent<JuganNode>();
+
+            b.fight = a.fight;
+
+            a.fight = new List<GameObject>();
+        }
+    }
+
+    void Start()
+    {
+
+    }
+
     void Update()
     {
-        moving();
+        selectNode();
+
+        if (click2 != null)
+        {
+            moving(click1, click2);
+
+            click1 = null;
+            click2 = null;
+        }
     }
 }
