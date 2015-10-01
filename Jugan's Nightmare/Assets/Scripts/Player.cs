@@ -9,8 +9,8 @@ public class Player : MonoBehaviour {
     public List<Unit_Properties> ownedUnits;
     public List<GameObject> moveUnits;
     public JuganNode mainBase;
-    public GameObject click1;
-    public GameObject click2;
+    public Transform click1;
+    public Transform click2;
 
     public Player()
     {
@@ -135,30 +135,24 @@ public class Player : MonoBehaviour {
                 {
                     if (click1 != null)
                     {
-                        click2 = hit.transform.gameObject;
+                        click2 = hit.transform.gameObject.transform;
                     }
                     else
                     {
-                        click1 = hit.transform.gameObject;
+                        click1 = hit.transform.gameObject.transform;
                     }
                 }
             }
         }
     }
 
-    public void moving(GameObject node1, GameObject node2)
+    public void moving(Transform node1, Transform node2)
     {
-        JuganNode n1 = node1.GetComponent<JuganNode>();
-        JuganNode n2 = node2.GetComponent<JuganNode>();
+        Transform[] moveKids = click1.GetComponentsInChildren<Transform>();
 
-        if (n1.n1.Equals(node2) || n1.n2.Equals(node2))
+        for (int i = 0; i < moveKids.Length; i++)
         {
-            JuganNode a = click1.GetComponent<JuganNode>();
-            JuganNode b = click2.GetComponent<JuganNode>();
-
-            b.fight = a.fight;
-
-            a.fight = new List<GameObject>();
+            moveKids[i].transform.parent = click2;
         }
     }
 

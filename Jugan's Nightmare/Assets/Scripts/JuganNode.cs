@@ -14,7 +14,6 @@ public class JuganNode : MonoBehaviour {
     public GameObject b1;
     public GameObject b2;
     public List<Unit_Properties> units = new List<Unit_Properties>();
-    public List<GameObject> fight = new List<GameObject>();
 
 	// Use this for initialization
 	void Start () {
