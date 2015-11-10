@@ -13,6 +13,7 @@ public class Player : MonoBehaviour {
     public int available;
     private Transform select1;
     private Transform select2;
+    private int moves;
 
 	// Use this for initialization
 	void Start () {
@@ -20,6 +21,7 @@ public class Player : MonoBehaviour {
         selection = mainBase;
         available = 3;
         eff.transform.position = mainBase.transform.position;
+        moves = 0;
     }
 	
 	// Update is called once per frame
@@ -60,24 +62,43 @@ public class Player : MonoBehaviour {
         {
             if(selection != null)
             {
-                if(select1 != null)
+                if (selection.childCount > 0)
                 {
-                    select2 = selection;
-                    select2.GetComponent<Node>().allUnits.AddRange(select1.GetComponent<Node>().allUnits);
-                    select1.GetComponent<Node>().allUnits.Clear();
-                    int j = 1;
-                    foreach(Transform i in select2.GetComponent<Node>().allUnits)
+                    foreach(Transform i in selection.GetComponent<Node>().allUnits)
                     {
-                        i.parent = select2;
-                        i.position = new Vector3(select2.position.x, 0.1f + 0.1f * j, select2.position.z);
-                        j++;
+                        if (i.GetComponent<Unit>().isMoved == false)
+                        {
+                            moves++;
+                            break;
+                        }
                     }
-                    select1 = null;
-                    select2 = null;
                 }
-                else
+
+                if (moves > 0)
                 {
-                    select1 = selection;
+                    if (select1 != null)
+                    {
+                        select2 = selection;
+                        select2.GetComponent<Node>().allUnits.AddRange(select1.GetComponent<Node>().allUnits);
+                        select1.GetComponent<Node>().allUnits.Clear();
+                        int j = 1;
+                        foreach (Transform i in select2.GetComponent<Node>().allUnits)
+                        {
+                            i.parent = select2;
+                            i.position = new Vector3(select2.position.x, 0.1f + 0.1f * j, select2.position.z);
+                            j++;
+                            i.GetComponent<Unit>().isMoved = true;
+                        }
+                        select1 = null;
+                        select2 = null;
+                        moves--;
+                    }
+                    else
+                    {
+                        select1 = selection;
+                    }
+
+                    moves = 0;
                 }
             }
         }

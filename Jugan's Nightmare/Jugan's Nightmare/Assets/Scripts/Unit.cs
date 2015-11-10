@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 public class Unit : MonoBehaviour {
     public int type;
+    public bool isMoved = false;
 
     public int[] getAttributes()
     {
