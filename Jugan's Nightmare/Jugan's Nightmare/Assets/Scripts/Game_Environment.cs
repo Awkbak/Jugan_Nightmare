@@ -40,11 +40,12 @@ public class Game_Environment : MonoBehaviour {
             idk.name = "Node" + i;
             idk.transform.localScale = new Vector3(1f,0.05f,1f);
             idk.transform.SetParent(allNodes);
+            idk.AddComponent<Node>();
             n.Add(idk);
         }
         for(var i = 0; i < 18; i++)
         {
-            Node s = new Node();
+            Node s = n[i].GetComponent<Node>();
             switch (i)
             {
                 case 0:

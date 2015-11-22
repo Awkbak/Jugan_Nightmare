@@ -98,7 +98,7 @@ public class Player : MonoBehaviour {
                         select1 = selection;
                     }
 
-                    moves = 0;
+                    //moves = 0;
                 }
             }
         }
