@@ -8,6 +8,8 @@ public class Game_Environment : MonoBehaviour {
     public Transform allNodes;
     public Transform redBase;
     public Transform blueBase;
+    public Computer AI;
+
 
 	void Start () {
         List<GameObject> n = new List<GameObject>();
@@ -145,8 +147,12 @@ public class Game_Environment : MonoBehaviour {
             blueBase = n[0].transform;
         }
 	}
-	
-	// Update is called once per frame
+
+    // Update is called once per frame
+    public void endturn()
+    {
+        AI.myturn = !AI.myturn;
+    }
 	void Update () {
 	
 	}

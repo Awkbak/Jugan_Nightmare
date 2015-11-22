@@ -3,8 +3,8 @@ using System.Collections.Generic;
 
 public class Player : MonoBehaviour {
     public List<Transform> allNodes = new List<Transform>();
-    public Transform environment;
-    public Transform mainBase;
+    public Game_Environment environment;
+    public Node mainBase;
     public Transform selection;
     public Transform dan0;
     public Transform dan1;
@@ -16,9 +16,9 @@ public class Player : MonoBehaviour {
     private int moves;
 
 	// Use this for initialization
-	void Start () {
-        mainBase = environment.GetComponent<Game_Environment>().blueBase;
-        selection = mainBase;
+	void Start () { 
+        mainBase = environment.blueBase.GetComponent<Node>();
+        selection = mainBase.transform;
         available = 3;
         eff.transform.position = mainBase.transform.position;
         moves = 0;
@@ -121,26 +121,27 @@ public class Player : MonoBehaviour {
 
     public void assign(int ID) //LADIES AND GENTLEMEN, STEP RIGHT UP, CHOOSE YOUR UNITS. 0 for Balance, 1 for Offense, and last but NOT least, 2 for defense!
     {
-        int x = mainBase.GetComponent<Node>().allUnits.Count;
+        int x = mainBase.allUnits.Count;
         if (available > 0)
         {
+            Transform t = mainBase.transform;
             if (ID == 0)
             {
-                Transform unit = Instantiate(dan0, new Vector3(mainBase.position.x, 0.1f + 0.1f * x, mainBase.position.z), transform.rotation) as Transform;
-                unit.transform.SetParent(mainBase);
-                mainBase.GetComponent<Node>().allUnits.Add(unit.transform);
+                Transform unit = Instantiate(dan0, new Vector3(t.position.x, 0.1f + 0.1f * x, t.position.z), transform.rotation) as Transform;
+                unit.transform.SetParent(mainBase.transform);
+                mainBase.allUnits.Add(unit.transform);
             }
             else if (ID == 1)
             {
-                Transform unit = Instantiate(dan1, new Vector3(mainBase.position.x, 0.1f + 0.1f * x, mainBase.position.z), transform.rotation) as Transform;
-                unit.transform.SetParent(mainBase);
-                mainBase.GetComponent<Node>().allUnits.Add(unit.transform);
+                Transform unit = Instantiate(dan1, new Vector3(t.position.x, 0.1f + 0.1f * x, t.position.z), transform.rotation) as Transform;
+                unit.transform.SetParent(mainBase.transform);
+                mainBase.allUnits.Add(unit.transform);
             }
             else
             {
-                Transform unit = Instantiate(dan2, new Vector3(mainBase.position.x, 0.1f + 0.1f * x, mainBase.position.z), transform.rotation) as Transform;
-                unit.transform.SetParent(mainBase);
-                mainBase.GetComponent<Node>().allUnits.Add(unit.transform);
+                Transform unit = Instantiate(dan2, new Vector3(t.position.x, 0.1f + 0.1f * x, t.position.z), transform.rotation) as Transform;
+                unit.transform.SetParent(mainBase.transform);
+                mainBase.allUnits.Add(unit.transform);
             }
             available -= 1;
         }
