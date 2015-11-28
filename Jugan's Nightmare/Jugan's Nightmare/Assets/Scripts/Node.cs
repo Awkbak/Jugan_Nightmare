@@ -8,7 +8,7 @@ public class Node : MonoBehaviour {
     public int shield;
     public int team = 0; //0 = neutral, 1 = blue, 2 = red.
     public bool mainbase = false;
-    public Transform f1, f2, b1, b2;
+    public Node f1, f2, b1, b2;
     public List<Transform> allUnits = new List<Transform>();
     float heuristic;
 

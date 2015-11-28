@@ -30,7 +30,7 @@ public class Player : MonoBehaviour {
         {
             if(selection.GetComponent<Node>().f1 != null)
             {
-                selection = selection.GetComponent<Node>().f1;
+                selection = selection.GetComponent<Node>().f1.transform;
                 eff.transform.position = selection.position;
             }
         }
@@ -38,7 +38,7 @@ public class Player : MonoBehaviour {
         {
             if(selection.GetComponent<Node>().f2 != null)
             {
-                selection = selection.GetComponent<Node>().f2;
+                selection = selection.GetComponent<Node>().f2.transform;
                 eff.transform.position = selection.position;
             }
         }
@@ -46,7 +46,7 @@ public class Player : MonoBehaviour {
         {
             if (selection.GetComponent<Node>().b1 != null)
             {
-                selection = selection.GetComponent<Node>().b1;
+                selection = selection.GetComponent<Node>().b1.transform;
                 eff.transform.position = selection.position;
             }
         }
@@ -54,7 +54,7 @@ public class Player : MonoBehaviour {
         {
             if (selection.GetComponent<Node>().b2 != null)
             {
-                selection = selection.GetComponent<Node>().b2;
+                selection = selection.GetComponent<Node>().b2.transform;
                 eff.transform.position = selection.position;
             }
         }
@@ -144,6 +144,17 @@ public class Player : MonoBehaviour {
                 mainBase.allUnits.Add(unit.transform);
             }
             available -= 1;
+        }
+    }
+
+    Node distance(Node n)
+    {
+        if (n == selection)
+            return n;
+        else
+        {
+            return distance(n.f1);
+            return distance(n.f2);
         }
     }
 }
