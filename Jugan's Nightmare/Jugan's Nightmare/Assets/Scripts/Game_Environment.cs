@@ -9,6 +9,7 @@ public class Game_Environment : MonoBehaviour {
     public Transform redBase;
     public Transform blueBase;
     public Computer AI;
+    private int difficulty;
 
 
 	void Start () {
@@ -32,18 +33,21 @@ public class Game_Environment : MonoBehaviour {
         positions.Add(new Vector3(-2f, 0f, 8f));
         positions.Add(new Vector3(2f, 0f, 8f));
         positions.Add(new Vector3(0f, 0f, 10f));
-
-        foreach(Node no in n)
+        for(var i=0;i<18;i++)
         {
             GameObject idk = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
+            idk.transform.position = positions[i];
+            idk.name = "Node " + i;
             idk.transform.localScale = new Vector3(1f,0.05f,1f);
             idk.transform.SetParent(allNodes);
-            idk.AddComponent<Node>();
+            Node ss = idk.AddComponent<Node>();
+            n.Add(ss);
         }
+        Debug.Log(n.Count);
 
         for(var i = 0; i < 18; i++)
         {
-            Node s = n[i].GetComponent<Node>();
+            Node s = n[i];
             switch (i)
             {
                 case 0:
@@ -138,10 +142,10 @@ public class Game_Environment : MonoBehaviour {
                     break;
             }
 
-            n[i].GetComponent<Node>().f1 = s.f1;
-            n[i].GetComponent<Node>().b1 = s.b1;
-            n[i].GetComponent<Node>().f2 = s.f2;
-            n[i].GetComponent<Node>().b2 = s.b2;
+            n[i].f1 = s.f1;
+            n[i].b1 = s.b1;
+            n[i].f2 = s.f2;
+            n[i].b2 = s.b2;
             redBase = n[17].transform;
             blueBase = n[0].transform;
         }
@@ -152,6 +156,22 @@ public class Game_Environment : MonoBehaviour {
     {
         AI.myturn = !AI.myturn;
     }
+
+    public void setDifficulty(int d)
+    {
+        difficulty = d;
+    }
+
+    public int getDifficulty()
+    {
+        return difficulty;
+    }
+
+    void OnGUI()
+    {
+        GUI.Label(new Rect(50, 50, 100, 50), "Pieces: " + )
+    }
+
 	void Update () {
 	
 	}
