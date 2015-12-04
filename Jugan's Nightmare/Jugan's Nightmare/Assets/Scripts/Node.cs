@@ -42,8 +42,14 @@ public class Node : MonoBehaviour {
             shield += k.getAttributes()[2];
         }
     }
-	// Use this for initialization
-	void Start () {
+
+    void OnGUI()
+    {
+        GUI.Label(new Rect(125, 49, 100, 50), "" + allUnits.Count);
+    }
+
+    // Use this for initialization
+    void Start () {
 	
 	}
 	

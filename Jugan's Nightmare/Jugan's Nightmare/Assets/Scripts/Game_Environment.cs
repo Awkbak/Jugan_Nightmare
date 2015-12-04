@@ -43,7 +43,6 @@ public class Game_Environment : MonoBehaviour {
             Node ss = idk.AddComponent<Node>();
             n.Add(ss);
         }
-        Debug.Log(n.Count);
 
         for(var i = 0; i < 18; i++)
         {
@@ -151,7 +150,6 @@ public class Game_Environment : MonoBehaviour {
         }
 	}
 
-    // Update is called once per frame
     public void endturn()
     {
         AI.myturn = !AI.myturn;
@@ -167,12 +165,7 @@ public class Game_Environment : MonoBehaviour {
         return difficulty;
     }
 
-    void OnGUI()
-    {
-        GUI.Label(new Rect(50, 50, 100, 50), "Pieces: " + )
-    }
-
 	void Update () {
-	
+
 	}
 }
