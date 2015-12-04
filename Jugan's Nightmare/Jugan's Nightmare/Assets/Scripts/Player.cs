@@ -18,6 +18,7 @@ public class Player : MonoBehaviour {
 	// Use this for initialization
 	void Start () { 
         mainBase = environment.blueBase.GetComponent<Node>();
+        mainBase.team = 1;
         selection = mainBase.transform;
         available = 3;
         eff.transform.position = mainBase.transform.position;
@@ -129,19 +130,19 @@ public class Player : MonoBehaviour {
             {
                 Transform unit = Instantiate(dan0, new Vector3(t.position.x, 0.1f + 0.1f * x, t.position.z), transform.rotation) as Transform;
                 unit.transform.SetParent(mainBase.transform);
-                mainBase.allUnits.Add(unit.transform);
+                mainBase.addUnit(1, unit);
             }
             else if (ID == 1)
             {
                 Transform unit = Instantiate(dan1, new Vector3(t.position.x, 0.1f + 0.1f * x, t.position.z), transform.rotation) as Transform;
                 unit.transform.SetParent(mainBase.transform);
-                mainBase.allUnits.Add(unit.transform);
+                mainBase.addUnit(1, unit);
             }
             else
             {
                 Transform unit = Instantiate(dan2, new Vector3(t.position.x, 0.1f + 0.1f * x, t.position.z), transform.rotation) as Transform;
                 unit.transform.SetParent(mainBase.transform);
-                mainBase.allUnits.Add(unit.transform);
+                mainBase.addUnit(1, unit);
             }
             available -= 1;
         }

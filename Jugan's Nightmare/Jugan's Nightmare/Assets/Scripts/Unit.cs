@@ -4,16 +4,9 @@ using System.Collections.Generic;
 public class Unit : MonoBehaviour {
     public int type;
     public bool isMoved = false;
-
-    public int[] getAttributes()
-    {
-        if (type == 0)
-            return new int[] { 1, 1, 1 };
-        else if(type == 1)
-            return new int[] { 2, 1, 1 };
-        else
-            return new int[] { 0, 2, 2 };
-    }
+    public int attack = 0;
+    public int health = 0;
+    public int defense = 0;
 	// BLEIGHHHHH
 	void Start () {
 	

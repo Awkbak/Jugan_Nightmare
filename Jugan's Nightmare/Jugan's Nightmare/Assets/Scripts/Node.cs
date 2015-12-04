@@ -23,6 +23,7 @@ public class Node : MonoBehaviour {
             team = t;
         }
         updateMan();
+        Debug.Log("Unit successfully updated");
     }
     public float getHeuristic()
     {
@@ -36,21 +37,25 @@ public class Node : MonoBehaviour {
         shield = 0;
         foreach(Transform s in allUnits)
         {
-            Unit k = s.parent.GetComponent<Unit>();
-            attack += k.getAttributes()[0];
-            health += k.getAttributes()[1];
-            shield += k.getAttributes()[2];
+            Unit k = s.GetComponent<Unit>();
+            attack += k.attack;
+            health += k.health;
+            shield += k.defense;
         }
     }
 
     void OnGUI()
     {
         GUI.Label(new Rect(125, 49, 100, 50), "" + allUnits.Count);
+        GUI.Label(new Rect(125, 75, 100, 50), "" + health);
+        GUI.Label(new Rect(125, 108, 100, 50), "" + attack);
     }
 
     // Use this for initialization
     void Start () {
-	
+        attack = 0;
+        health = 0;
+        shield = 0;
 	}
 	
 	// Update is called once per frame
