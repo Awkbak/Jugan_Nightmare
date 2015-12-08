@@ -148,16 +148,6 @@ public class Player : MonoBehaviour {
         }
     }
 
-    Node distance(Node n)
-    {
-        if (n == selection)
-            return n;
-        else
-        {
-            return distance(n.f1);
-            return distance(n.f2);
-        }
-    }
 }
 
     

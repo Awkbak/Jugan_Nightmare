@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public class Computer : MonoBehaviour {
     public Transform mainBase;
     public bool myturn;
-    public List<Transform> allNodes = new List<Transform>();
+    public List<Node> allNodes = new List<Node>();
     public Transform environment;
     public Transform dan0;
     public Transform dan1;
@@ -43,7 +43,11 @@ public class Computer : MonoBehaviour {
 	}
     void findbestmove()
     {
-        float heuristic = 2.22f;
+        float heuristic = 1000f;
+        foreach(Node ok in allNodes)
+        {
+            
+        }
         //get heuristic of each node ignore if 0
         //determine best move for PC and worst move for player
         //change select1 and select2 according to best move
@@ -95,4 +99,5 @@ public class Computer : MonoBehaviour {
             }
         }
     }
+
 }
