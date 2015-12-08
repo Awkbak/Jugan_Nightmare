@@ -9,14 +9,16 @@ public class Player : MonoBehaviour {
     public Transform dan0;
     public Transform dan1;
     public Transform dan2;
-    public Transform eff;
+    public Transform eff; //sparkles
     public int available;
+    public bool myTurn;
     private Transform select1;
     private Transform select2;
     private int moves;
 
 	// Use this for initialization
-	void Start () { 
+	void Start () {
+        myTurn = true;
         mainBase = environment.blueBase.GetComponent<Node>();
         mainBase.team = 1;
         selection = mainBase.transform;
@@ -27,82 +29,90 @@ public class Player : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetKeyDown("w"))
+        if (myTurn)
         {
-            if(selection.GetComponent<Node>().f1 != null)
+            if (Input.GetKeyDown("w"))
             {
-                selection = selection.GetComponent<Node>().f1.transform;
-                eff.transform.position = selection.position;
-            }
-        }
-        else if(Input.GetKeyDown("s"))
-        {
-            if(selection.GetComponent<Node>().f2 != null)
-            {
-                selection = selection.GetComponent<Node>().f2.transform;
-                eff.transform.position = selection.position;
-            }
-        }
-        else if (Input.GetKeyDown("q"))
-        {
-            if (selection.GetComponent<Node>().b1 != null)
-            {
-                selection = selection.GetComponent<Node>().b1.transform;
-                eff.transform.position = selection.position;
-            }
-        }
-        else if (Input.GetKeyDown("a"))
-        {
-            if (selection.GetComponent<Node>().b2 != null)
-            {
-                selection = selection.GetComponent<Node>().b2.transform;
-                eff.transform.position = selection.position;
-            }
-        }
-        else if (Input.GetKeyDown("space"))
-        {
-            if(selection != null)
-            {
-                if (selection.childCount > 0)
+                if (selection.GetComponent<Node>().f1 != null)
                 {
-                    foreach(Transform i in selection.GetComponent<Node>().allUnits)
-                    {
-                        if (i.GetComponent<Unit>().isMoved == false)
-                        {
-                            moves++;
-                            break;
-                        }
-                    }
-                }
-
-                if (moves > 0)
-                {
-                    if (select1 != null)
-                    {
-                        select2 = selection;
-                        select2.GetComponent<Node>().allUnits.AddRange(select1.GetComponent<Node>().allUnits);
-                        select1.GetComponent<Node>().allUnits.Clear();
-                        int j = 1;
-                        foreach (Transform i in select2.GetComponent<Node>().allUnits)
-                        {
-                            i.parent = select2;
-                            i.position = new Vector3(select2.position.x, 0.1f + 0.1f * j, select2.position.z);
-                            j++;
-                            i.GetComponent<Unit>().isMoved = true;
-                        }
-                        select1 = null;
-                        select2 = null;
-                        moves--;
-                    }
-                    else
-                    {
-                        select1 = selection;
-                    }
-
-                    //moves = 0;
+                    selection = selection.GetComponent<Node>().f1.transform;
+                    eff.transform.position = selection.position;
                 }
             }
+            else if (Input.GetKeyDown("s"))
+            {
+                if (selection.GetComponent<Node>().f2 != null)
+                {
+                    selection = selection.GetComponent<Node>().f2.transform;
+                    eff.transform.position = selection.position;
+                }
+            }
+            else if (Input.GetKeyDown("q"))
+            {
+                if (selection.GetComponent<Node>().b1 != null)
+                {
+                    selection = selection.GetComponent<Node>().b1.transform;
+                    eff.transform.position = selection.position;
+                }
+            }
+            else if (Input.GetKeyDown("a"))
+            {
+                if (selection.GetComponent<Node>().b2 != null)
+                {
+                    selection = selection.GetComponent<Node>().b2.transform;
+                    eff.transform.position = selection.position;
+                }
+            }
+            else if (Input.GetKeyDown("space"))
+            {
+                if (selection != null)
+                {
+                    if (selection.childCount > 0)
+                    {
+                        foreach (Transform i in selection.GetComponent<Node>().allUnits)
+                        {
+                            if (i.GetComponent<Unit>().isMoved == false)
+                            {
+                                moves++;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (moves > 0)
+                    {
+                        if (select1 != null)
+                        {
+                            select2 = selection;
+                            select2.GetComponent<Node>().allUnits.AddRange(select1.GetComponent<Node>().allUnits);
+                            select1.GetComponent<Node>().allUnits.Clear();
+                            int j = 1;
+                            foreach (Transform i in select2.GetComponent<Node>().allUnits)
+                            {
+                                i.parent = select2;
+                                i.position = new Vector3(select2.position.x, 0.1f + 0.1f * j, select2.position.z);
+                                j++;
+                                i.GetComponent<Unit>().isMoved = true;
+                            }
+                            select1 = null;
+                            select2 = null;
+                            moves--;
+                        }
+                        else
+                        {
+                            select1 = selection;
+                        }
+
+                        //moves = 0;
+                    }
+                }
+            }
         }
+    }
+
+    public void StartTurn()
+    {
+        available += 2;
     }
 
     void move(Transform o, Transform n)
@@ -147,7 +157,6 @@ public class Player : MonoBehaviour {
             available -= 1;
         }
     }
-
 }
 
     

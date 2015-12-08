@@ -6,9 +6,10 @@ public class Game_Environment : MonoBehaviour {
 
     List<Vector3> positions = new List<Vector3>();
     public Transform allNodes;
-    public Transform redBase;
+    public Node redBase;
     public Transform blueBase;
     public Computer AI;
+    public Player player;
     private int difficulty;
 
 
@@ -33,7 +34,8 @@ public class Game_Environment : MonoBehaviour {
         positions.Add(new Vector3(-2f, 0f, 8f));
         positions.Add(new Vector3(2f, 0f, 8f));
         positions.Add(new Vector3(0f, 0f, 10f));
-        for(var i=0;i<18;i++)
+
+        for(var i = 0; i < 18; i++)
         {
             GameObject idk = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
             idk.transform.position = positions[i];
@@ -145,14 +147,27 @@ public class Game_Environment : MonoBehaviour {
             n[i].b1 = s.b1;
             n[i].f2 = s.f2;
             n[i].b2 = s.b2;
-            redBase = n[17].transform;
+            redBase = n[17];
             blueBase = n[0].transform;
         }
+        Debug.Log(n[17].b1.team);
+        AI.mainBase = n[17];
+        AI.mainBase.team = 2;
 	}
 
     public void endturn()
     {
         AI.myturn = !AI.myturn;
+        player.myTurn = !player.myTurn;
+
+        if(AI.myturn)
+        {
+            AI.StartTurn();
+        }
+        else
+        {
+            player.StartTurn();
+        }
     }
 
     public void setDifficulty(int d)

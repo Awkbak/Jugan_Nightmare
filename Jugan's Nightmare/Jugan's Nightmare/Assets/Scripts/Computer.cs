@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 
 public class Computer : MonoBehaviour {
-    public Transform mainBase;
+    public Node mainBase;
     public bool myturn;
     public List<Node> allNodes = new List<Node>();
-    public Transform environment;
+    public Game_Environment environment;
     public Transform dan0;
     public Transform dan1;
     public Transform dan2;
@@ -16,9 +16,9 @@ public class Computer : MonoBehaviour {
     private int availablemoves;
     float needAttack;
     float needDefense;
+
     void Start () {
         myturn = false;
-        mainBase = environment.GetComponent<Game_Environment>().redBase;
         available = 3;
     }
 	
@@ -30,7 +30,7 @@ public class Computer : MonoBehaviour {
         //find the best move possible, use difficulty to change heuristic
         //move units according to best move
         //end turn
-       if(myturn == true)
+       if(myturn)
         {
             addUnit();
             while (availablemoves > 0)
@@ -39,11 +39,17 @@ public class Computer : MonoBehaviour {
                 move();
             }
         }
-	
 	}
+
+    public void StartTurn()
+    {
+        available += 2;
+    }
+
     void findbestmove()
     {
         float heuristic = 1000f;
+
         foreach(Node ok in allNodes)
         {
             
@@ -76,28 +82,29 @@ public class Computer : MonoBehaviour {
     }
     void addUnit()
     {
-        while (available > 0)
+        int x = mainBase.allUnits.Count;
+        if (available > 0)
         {
-            int x = mainBase.GetComponent<Node>().allUnits.Count;
-            if (Mathf.Abs(needAttack - needDefense) < 0.2)
+            Transform t = mainBase.transform;
+            if (needAttack - needDefense <  -0.2)
             {
-                Transform unit = Instantiate(dan0, new Vector3(mainBase.position.x, 0.1f + 0.1f * x, mainBase.position.z), transform.rotation) as Transform;
-                unit.transform.SetParent(mainBase);
-                mainBase.GetComponent<Node>().allUnits.Add(unit.transform);
+                Transform unit = Instantiate(dan0, new Vector3(t.position.x, 0.1f + 0.1f * x, t.position.z), transform.rotation) as Transform;
+                unit.transform.SetParent(mainBase.transform);
+                mainBase.addUnit(1, unit);
             }
             else if (needAttack - needDefense > 0.2)
             {
-                Transform unit = Instantiate(dan1, new Vector3(mainBase.position.x, 0.1f + 0.1f * x, mainBase.position.z), transform.rotation) as Transform;
-                unit.transform.SetParent(mainBase);
-                mainBase.GetComponent<Node>().allUnits.Add(unit.transform);
+                Transform unit = Instantiate(dan1, new Vector3(t.position.x, 0.1f + 0.1f * x, t.position.z), transform.rotation) as Transform;
+                unit.transform.SetParent(mainBase.transform);
+                mainBase.addUnit(1, unit);
             }
             else
             {
-                Transform unit = Instantiate(dan2, new Vector3(mainBase.position.x, 0.1f + 0.1f * x, mainBase.position.z), transform.rotation) as Transform;
-                unit.transform.SetParent(mainBase);
-                mainBase.GetComponent<Node>().allUnits.Add(unit.transform);
+                Transform unit = Instantiate(dan2, new Vector3(t.position.x, 0.1f + 0.1f * x, t.position.z), transform.rotation) as Transform;
+                unit.transform.SetParent(mainBase.transform);
+                mainBase.addUnit(1, unit);
             }
+            available -= 1;
         }
     }
-
 }
