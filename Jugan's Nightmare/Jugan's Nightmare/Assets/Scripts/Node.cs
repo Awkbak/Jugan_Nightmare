@@ -23,7 +23,6 @@ public class Node : MonoBehaviour {
             team = t;
         }
         updateMan();
-        Debug.Log("Unit successfully updated");
     }
     public float getHeuristic()
     {
