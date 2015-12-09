@@ -63,23 +63,28 @@ public class Computer : MonoBehaviour {
         select2.GetComponent<Node>().allUnits.AddRange(select1.GetComponent<Node>().allUnits);
         select1.GetComponent<Node>().allUnits.Clear();
         int j = 1;
+
         foreach (Transform i in select2.GetComponent<Node>().allUnits)
         {
             i.parent = select2;
             i.position = new Vector3(select2.position.x, 0.1f + 0.1f * j, select2.position.z);
             j++;
         }
+
         select1 = null;
         select2 = null;
     }
+
     void selectUnit()
     {
 
     }
+
     void selectNode()
     {
 
     }
+
     void addUnit()
     {
         int x = mainBase.allUnits.Count;

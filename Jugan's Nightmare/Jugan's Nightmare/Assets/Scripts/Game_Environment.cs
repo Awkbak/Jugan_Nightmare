@@ -10,8 +10,8 @@ public class Game_Environment : MonoBehaviour {
     public Transform blueBase;
     public Computer AI;
     public Player player;
-    private int difficulty;
-
+    public static float difficulty;
+    public List<Node> nodes = new List<Node>();
 
 	void Start () {
         List<Node> n = new List<Node>();
@@ -150,9 +150,11 @@ public class Game_Environment : MonoBehaviour {
             redBase = n[17];
             blueBase = n[0].transform;
         }
-        Debug.Log(n[17].b1.team);
+
         AI.mainBase = n[17];
         AI.mainBase.team = 2;
+
+        nodes = n;
 	}
 
     public void endturn()
@@ -170,12 +172,12 @@ public class Game_Environment : MonoBehaviour {
         }
     }
 
-    public void setDifficulty(int d)
+    public static void setDifficulty(float d)
     {
         difficulty = d;
     }
 
-    public int getDifficulty()
+    public float getDifficulty()
     {
         return difficulty;
     }

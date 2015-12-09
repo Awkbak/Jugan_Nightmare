@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -23,32 +24,27 @@ public class Node : MonoBehaviour {
             team = t;
         }
         updateMan();
-        Debug.Log("Unit successfully updated");
     }
+
     public float getHeuristic()
     {
         //Use Attack, Defense, Health of node and ajacent nodes to calculate heurisitc
         return -1;
     }
+
     public void updateMan()
     {
         attack = 0;
         health = 0;
         shield = 0;
-        foreach(Transform s in allUnits)
+
+        foreach (Transform s in allUnits)
         {
             Unit k = s.GetComponent<Unit>();
             attack += k.attack;
             health += k.health;
             shield += k.defense;
         }
-    }
-
-    void OnGUI()
-    {
-        GUI.Label(new Rect(125, 49, 100, 50), "" + allUnits.Count);
-        GUI.Label(new Rect(125, 75, 100, 50), "" + health);
-        GUI.Label(new Rect(125, 108, 100, 50), "" + attack);
     }
 
     // Use this for initialization
