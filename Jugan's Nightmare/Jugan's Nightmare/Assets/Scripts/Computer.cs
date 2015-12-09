@@ -87,32 +87,9 @@ public class Computer : MonoBehaviour {
         //determine best move for PC and worst move for player
         //change select1 and select2 according to best move
     }
+
     void move()
     {
-<<<<<<< HEAD
-        select2.GetComponent<Node>().allUnits.AddRange(select1.GetComponent<Node>().allUnits);
-        select1.GetComponent<Node>().allUnits.Clear();
-        int j = 1;
-
-        foreach (Transform i in select2.GetComponent<Node>().allUnits)
-        {
-            i.parent = select2;
-            i.position = new Vector3(select2.position.x, 0.1f + 0.1f * j, select2.position.z);
-            j++;
-        }
-
-        select1 = null;
-        select2 = null;
-    }
-
-    void selectUnit()
-    {
-
-    }
-
-    void selectNode()
-    {
-=======
         int moves = 0;
         if (select1 != null)
         {
@@ -127,7 +104,6 @@ public class Computer : MonoBehaviour {
                     }
                 }
             }
->>>>>>> origin/master
 
             if (moves > 0)
             {
@@ -136,6 +112,7 @@ public class Computer : MonoBehaviour {
                     select2.GetComponent<Node>().allUnits.AddRange(select1.GetComponent<Node>().allUnits);
                     select1.GetComponent<Node>().allUnits.Clear();
                     int j = 1;
+
                     foreach (Transform i in select2.GetComponent<Node>().allUnits)
                     {
                         i.parent = select2;
@@ -143,12 +120,14 @@ public class Computer : MonoBehaviour {
                         j++;
                         i.GetComponent<Unit>().isMoved = true;
                     }
+
                     select2.GetComponent<Node>().team = 2; //needs fix
                     allNodes.Add(select2.GetComponent<Node>());
                     select1 = null;
                     select2 = null;
                     moves--;
                 }
+
                 select1 = null;
                 select2 = null;
             }
@@ -164,6 +143,7 @@ public class Computer : MonoBehaviour {
             needAttack = Random.value;
             needDefense = Random.value;
             Transform t = mainBase.transform;
+
             if (needAttack - needDefense <  -0.2)
             {
                 Transform unit = Instantiate(dan0, new Vector3(t.position.x, 0.1f + 0.1f * i, t.position.z), transform.rotation) as Transform;
@@ -185,6 +165,7 @@ public class Computer : MonoBehaviour {
                 mainBase.addUnit(1, unit);
                 allNodes.Add(unit.GetComponent<Node>());
             }
+
             i++;
             available -= 1;
         }
